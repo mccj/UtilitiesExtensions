@@ -133,7 +133,7 @@ namespace System.Linq
         //public static string ToJson<T>(this T value)
         //{
         //    //return System.Web.Helpers.Json.Encode(value);
-        //    return Orchard.Utility.Json.Encode(value);
+        //    return UtilitiesExtensions.Utility.Json.Encode(value);
         //}
         //public static T MergerExpression<T>(this T source, object obj, bool 只映射值类型 = false, Type[] 排除类型 = null, object[] 空不赋值 = null, params Expression<Func<T, object>>[] excludeExpressions) where T : class
         //{

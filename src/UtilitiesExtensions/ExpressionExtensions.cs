@@ -221,7 +221,7 @@ namespace System.Linq
 
         //public static Expression RemoveConvert(this Expression expression)
         //{
-        //    Orchard.Utility.DebugCheck.NotNull(expression);
+        //    UtilitiesExtensions.Utility.DebugCheck.NotNull(expression);
 
         //    while (expression.NodeType == ExpressionType.Convert
         //           || expression.NodeType == ExpressionType.ConvertChecked)

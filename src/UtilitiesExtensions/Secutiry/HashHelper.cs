@@ -1,7 +1,7 @@
 ﻿using System.Security.Cryptography;
 using System.Text;
 using System.Linq;
-namespace Orchard.Utility.Secutiry
+namespace UtilitiesExtensions.Utility.Secutiry
 {
     /// <summary>
     /// 字符串Hash操作类

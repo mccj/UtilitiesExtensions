@@ -1,4 +1,4 @@
-using Orchard.Utility;
+using UtilitiesExtensions.Utility;
 using System.Collections.Generic;
 
 namespace System.Linq

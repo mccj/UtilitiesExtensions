@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
-using System.Text.RegularExpressions;
+﻿using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
+using System.Text;
+using System.Text.RegularExpressions;
 
 namespace System.Linq
 {
@@ -507,7 +503,7 @@ namespace System.Linq
         /// </summary>
         public static string ToMd5Hash(this string value)
         {
-            return Orchard.Utility.Secutiry.HashHelper.GetMd5(value);
+            return UtilitiesExtensions.Utility.Secutiry.HashHelper.GetMd5(value);
         }
         public static string ToBase64Url(this string value)
         {
@@ -575,7 +571,7 @@ namespace System.Linq
         //{
         //    json.CheckNotNull("json");
         //    //return System.Web.Helpers.Json.Decode<T>(json);
-        //    return Orchard.Utility.Json.Decode<T>(json);
+        //    return UtilitiesExtensions.Utility.Json.Decode<T>(json);
         //}
         ///// <summary>
         ///// 将JSON字符串还原为对象
@@ -587,7 +583,7 @@ namespace System.Linq
         //{
         //    json.CheckNotNull("json");
         //    //return System.Web.Helpers.Json.Decode(json, type);
-        //    return Orchard.Utility.Json.Decode(json, type);
+        //    return UtilitiesExtensions.Utility.Json.Decode(json, type);
         //}
         ///// <summary>
         ///// 将JSON字符串还原为对象
@@ -598,7 +594,7 @@ namespace System.Linq
         //{
         //    json.CheckNotNull("json");
         //    //return System.Web.Helpers.Json.Decode(json);
-        //    return Orchard.Utility.Json.Decode(json);
+        //    return UtilitiesExtensions.Utility.Json.Decode(json);
         //}
         ///// <summary>
         ///// 将xml字符串还原为对象
@@ -610,7 +606,7 @@ namespace System.Linq
         //{
         //    xml.CheckNotNull("xml");
         //    //return System.Web.Helpers.Json.Decode<T>(json);
-        //    return Orchard.Utility.SerializationHelper.DeserializeFromXml<T>(xml);
+        //    return UtilitiesExtensions.Utility.SerializationHelper.DeserializeFromXml<T>(xml);
         //}
         ///// <summary>
         ///// 将xml字符串还原为对象
@@ -622,13 +618,13 @@ namespace System.Linq
         //{
         //    xml.CheckNotNull("xml");
         //    //return System.Web.Helpers.Json.Decode(json, type);
-        //    return Orchard.Utility.SerializationHelper.DeserializeFromXml(xml, type);
+        //    return UtilitiesExtensions.Utility.SerializationHelper.DeserializeFromXml(xml, type);
         //}
         ////public static dynamic ToXmlEntity(this string xml)
         ////{
         ////    xml.CheckNotNull("xml");
         ////    //return System.Web.Helpers.Json.Decode(json);
-        ////    return Orchard.Utility.SerializationHelper.DeserializeFromXml(xml);
+        ////    return UtilitiesExtensions.Utility.SerializationHelper.DeserializeFromXml(xml);
         ////}
         /// <summary>
         /// 将字符串转换为<see cref="byte"/>[]数组，默认编码为<see cref="Encoding.UTF8"/>
@@ -904,5 +900,1169 @@ namespace System.Linq
         //    return new string(result, 0, cursor);
         //}
         //#endregion 命名方法
+
+        public static string StripDigits(this string input)
+        {
+            return Regex.Replace(input, "[\\d-]", string.Empty);
+        }
+
+        //public static string Encrypt(this string plainText, string passPhrase)
+        //{
+        //    return new UtilitiesExtensions.Utility.Encryption().EncryptString(plainText, passPhrase);
+        //}
+
+        //public static string Decrypt(this string cipherText, string passPhrase)
+        //{
+        //    return new UtilitiesExtensions.Utility.Encryption().DecryptString(cipherText, passPhrase);
+        //}
+
+        public static string SanitizeArabic(this string input)
+        {
+            return input.Replace("أ", "ا").Replace("إ", "ا").Replace("آ", "ا")
+                .Replace("ي", "ى")
+                .Replace("ة", "ه")
+                .Replace("لأ", "لا")
+                .Replace("لإ", "لا");
+        }
+
+
+        //Essa classe possui códigos adaptados da internet.
+        //Para a fonte inicial de alguns desses métodos acesse http://stackoverflow.com/questions/19523913/remove-html-tags-from-string-including-nbsp-in-c-sharp .
+
+        #region Métodos para remoção de tags
+
+        /// <summary> Regex para identificar tags html ou xml.</summary>
+        private static readonly Regex tags = new Regex(@"<[^>]+?>", RegexOptions.Multiline | RegexOptions.Compiled);
+
+        /// <summary> Remove quaisquer tags (HTML, XML, etc.) encontradas no texto original.
+        /// <para>Esse método não elimina o conteúdo interno da tag.</para> </summary>
+        /// <param name="source"> String original. </param>
+        /// <returns> String contendo o texto original desprovido de tags. </returns>
+        public static string RemoverTags(this string source)
+        {
+            //Caso o método seja chamado em uma string vazia ou nula, retorne uma string vazia
+            if (string.IsNullOrEmpty(source))
+                return string.Empty;
+
+            return tags.Replace(source, string.Empty);
+        }
+
+        ///// <summary> Elimina todas as tags HTML encontradas na string, bem como o conteúdo interno de tags de comentário, script ou style,
+        /////  mantendo apenas texto corrido separado por espaços simples. </summary>
+        ///// <param name="html"> Texto original cujo HTML será removido. </param>
+        ///// <returns> String contendo apenas o texto original, ignorando quaisquer tags ou conteúdo específico de HTML (como comentários, scripts ou css). </returns>
+        //public static String RemoverHtml(this String html)
+        //{
+        //    //Caso o método seja chamado em uma string vazia ou nula, retorne uma string vazia
+        //    if (string.IsNullOrEmpty(html))
+        //        return string.Empty;
+
+        //    html = System.Web.HttpUtility.UrlDecode(html);
+        //    html = System.Web.HttpUtility.HtmlDecode(html);
+
+        //    html = RemoverTag(html, "<!--", "-->");
+        //    html = RemoverTag(html, "<script", "</script>");
+        //    html = RemoverTag(html, "<style", "</style>");
+
+        //    //Utiliza os Regex para substituir qualquer correspondência (tags) encontrada no texto por espaço
+        //    html = tags.Replace(html, " ");
+        //    html = ManterEspacoSimples(html);
+
+        //    return html;
+        //}
+
+        /// <summary> Remove uma tag específica e todo seu conteúdo interno. </summary>
+        /// <param name="html"> Texto original do qual será extraída a tag. </param>
+        /// <param name="inicioTag"> Demarcação do início da Tag. </param>
+        /// <param name="finalTag"> Demarcação do final da Tag. </param>
+        /// <returns> String contendo o texto original menos qualquer ocorrência da tag informada e seu conteúdo interno. </returns>
+        public static String RemoverTag(this String html, String inicioTag, String finalTag)
+        {
+            //Caso o método seja chamado em uma string vazia ou nula, retorne uma string vazia
+            if (string.IsNullOrEmpty(html))
+                return string.Empty;
+
+            Boolean repetir;
+            do
+            {
+                repetir = false; //Variável para controle da repetição
+                //Procura pelo início da tag no texto
+                Int32 posicaoInicialTag = html.IndexOf(inicioTag, 0, StringComparison.CurrentCultureIgnoreCase);
+                //Caso não seja encontrado o fim da tag, sai do loop.
+                if (posicaoInicialTag < 0)
+                    break;
+                //Procura pelo fim da tag no texto
+                Int32 posicaoFinalTag = html.IndexOf(finalTag, posicaoInicialTag + 1, StringComparison.CurrentCultureIgnoreCase);
+                //Caso não seja encontrado o fim da tag, sai do loop.
+                if (posicaoFinalTag <= posicaoInicialTag)
+                    break;
+                //Remove todo o trecho entre o início e o final da tag
+                html = html.Remove(posicaoInicialTag, posicaoFinalTag - posicaoInicialTag + finalTag.Length);
+                //Executa novamente a verificação para garantir que não haja mais nenhuma tag
+                repetir = true;
+            } while (repetir);
+            return html;
+        }
+        #endregion
+
+        #region Métodos para formatação ou limpeza de texto
+        /// <summary> Substitui toda quebra de linha ou espaço longo por espaços simples. </summary>
+        /// <param name="textoOriginal"> O texto cujos espaços serão removidos. </param>
+        /// <returns> string contendo o texto original sem quebras de linha e apenas com espaços simples entre as palavras. </returns>
+        public static string ManterEspacoSimples(this string textoOriginal)
+        {
+            //Caso o método seja chamado em uma string vazia ou nula, retorne uma string vazia
+            if (string.IsNullOrEmpty(textoOriginal))
+                return string.Empty;
+
+            StringBuilder sb = new StringBuilder();
+            Boolean inBlanks = false; //Define se já foi inserido um espaço antes do caracter atual
+            foreach (Char c in textoOriginal)
+            {
+                //Se o caracter for um espaço vazio (espaços, tabulações, quebras de linha, etc.)
+                if (Char.IsWhiteSpace(c))
+                {
+                    //Apenas se não já tiver sido inserido um espaço anterior, insira um espaço vazio
+                    if (!inBlanks)
+                    {
+                        inBlanks = true;
+                        sb.Append(' ');
+                    }
+                }
+                else
+                {
+                    inBlanks = false;
+                    sb.Append(c);
+                }
+            }
+            return sb.ToString().Trim();
+        }
+        #endregion
+
+        #region sss
+
+        public static byte[] GetBytes(this string source)
+        {
+            return Encoding.Default.GetBytes(source);
+        }
+
+        public static byte[] GetBytes(this string source, Encoding encoding)
+        {
+            return encoding.GetBytes(source);
+        }
+
+        public static string Enclose(this string s, string bothEnds)
+        {
+            return bothEnds + s + bothEnds;
+        }
+
+        public static string Enclose(this string s, string leftEnds, string rightEnds)
+        {
+            return leftEnds + s + rightEnds;
+        }
+
+        public static string MakeXsvField(this string str, IEnumerable<string> delimiters)
+        {
+            string result = str.Replace("\"", "\"\"");
+            string text = result.Trim();
+            if (result.Length != text.Length || new string[3]
+            {
+            "\"",
+            "\r",
+            "\n"
+            }.Concat(delimiters).Any((string s) => result.Contains(s)))
+            {
+                result = Enclose(result, "\"");
+            }
+            return result;
+        }
+
+        public static TEnum ToEnum<TEnum>(this string str, bool ignoreCase = true) where TEnum : struct
+        {
+            Type typeFromHandle = typeof(TEnum);
+            ThrowIfNotEnumType(typeFromHandle);
+            return (TEnum)Enum.Parse(typeFromHandle, str, ignoreCase);
+        }
+
+        public static TEnum? ToEnumOrNull<TEnum>(this string str, bool ignoreCase = true) where TEnum : struct
+        {
+            Type typeFromHandle = typeof(TEnum);
+            ThrowIfNotEnumType(typeFromHandle);
+            if (TryParseEnum(str, ignoreCase, out TEnum result) && Enum.IsDefined(typeFromHandle, result))
+            {
+                return result;
+            }
+            return null;
+        }
+
+        public static TEnum ToEnumOrDefault<TEnum>(this string str, TEnum defaultValue = default(TEnum), bool ignoreCase = true) where TEnum : struct
+        {
+            Type typeFromHandle = typeof(TEnum);
+            ThrowIfNotEnumType(typeFromHandle);
+            if (TryParseEnum(str, ignoreCase, out TEnum result) && Enum.IsDefined(typeFromHandle, result))
+            {
+                return result;
+            }
+            return defaultValue;
+        }
+
+        private static void ThrowIfNotEnumType(Type type)
+        {
+            if (!type.IsEnum)
+            {
+                throw new TypeAccessException("TEnum must be an enum type.");
+            }
+        }
+
+        private static bool TryParseEnum<TEnum>(string str, bool ignoreCase, out TEnum result) where TEnum : struct
+        {
+            return Enum.TryParse(str, ignoreCase, out result);
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        public static sbyte ToSByte(this string s)
+        {
+            return sbyte.Parse(s);
+        }
+
+        public static sbyte? ToSByteOrNull(this string s)
+        {
+            if (sbyte.TryParse(s, out sbyte result))
+            {
+                return result;
+            }
+            return null;
+        }
+
+        public static sbyte ToSByteOrDefault(this string s, sbyte defaultValue = 0)
+        {
+            if (sbyte.TryParse(s, out sbyte result))
+            {
+                return result;
+            }
+            return defaultValue;
+        }
+
+        public static sbyte ToSByte(this string s, IFormatProvider formatProvider)
+        {
+            return sbyte.Parse(s, formatProvider);
+        }
+
+        public static sbyte ToSByte(this string s, NumberStyles numberStyles)
+        {
+            return sbyte.Parse(s, numberStyles);
+        }
+
+        public static sbyte ToSByte(this string s, NumberStyles numberStyles, IFormatProvider formatProvider)
+        {
+            return sbyte.Parse(s, numberStyles, formatProvider);
+        }
+
+        public static sbyte? ToSByteOrNull(this string s, NumberStyles numberStyles, IFormatProvider formatProvider)
+        {
+            if (sbyte.TryParse(s, numberStyles, formatProvider, out sbyte result))
+            {
+                return result;
+            }
+            return null;
+        }
+
+        public static sbyte? ToSByteOrNull(this string s, NumberStyles numberStyles)
+        {
+            if (sbyte.TryParse(s, numberStyles, null, out sbyte result))
+            {
+                return result;
+            }
+            return null;
+        }
+
+        public static sbyte ToSByteOrDefault(this string s, NumberStyles numberStyles, sbyte defaultValue = 0)
+        {
+            if (sbyte.TryParse(s, numberStyles, null, out sbyte result))
+            {
+                return result;
+            }
+            return defaultValue;
+        }
+
+        public static sbyte ToSByteOrDefault(this string s, NumberStyles numberStyles, IFormatProvider formatProvider, sbyte defaultValue = 0)
+        {
+            if (sbyte.TryParse(s, numberStyles, formatProvider, out sbyte result))
+            {
+                return result;
+            }
+            return defaultValue;
+        }
+
+        public static byte ToByte(this string s)
+        {
+            return byte.Parse(s);
+        }
+
+        public static byte? ToByteOrNull(this string s)
+        {
+            if (byte.TryParse(s, out byte result))
+            {
+                return result;
+            }
+            return null;
+        }
+
+        public static byte ToByteOrDefault(this string s, byte defaultValue = 0)
+        {
+            if (byte.TryParse(s, out byte result))
+            {
+                return result;
+            }
+            return defaultValue;
+        }
+
+        public static byte ToByte(this string s, IFormatProvider formatProvider)
+        {
+            return byte.Parse(s, formatProvider);
+        }
+
+        public static byte ToByte(this string s, NumberStyles numberStyles)
+        {
+            return byte.Parse(s, numberStyles);
+        }
+
+        public static byte ToByte(this string s, NumberStyles numberStyles, IFormatProvider formatProvider)
+        {
+            return byte.Parse(s, numberStyles, formatProvider);
+        }
+
+        public static byte? ToByteOrNull(this string s, NumberStyles numberStyles, IFormatProvider formatProvider)
+        {
+            if (byte.TryParse(s, numberStyles, formatProvider, out byte result))
+            {
+                return result;
+            }
+            return null;
+        }
+
+        public static byte? ToByteOrNull(this string s, NumberStyles numberStyles)
+        {
+            if (byte.TryParse(s, numberStyles, null, out byte result))
+            {
+                return result;
+            }
+            return null;
+        }
+
+        public static byte ToByteOrDefault(this string s, NumberStyles numberStyles, byte defaultValue = 0)
+        {
+            if (byte.TryParse(s, numberStyles, null, out byte result))
+            {
+                return result;
+            }
+            return defaultValue;
+        }
+
+        public static byte ToByteOrDefault(this string s, NumberStyles numberStyles, IFormatProvider formatProvider, byte defaultValue = 0)
+        {
+            if (byte.TryParse(s, numberStyles, formatProvider, out byte result))
+            {
+                return result;
+            }
+            return defaultValue;
+        }
+
+        public static char ToChar(this string s)
+        {
+            return char.Parse(s);
+        }
+
+        public static char? ToCharOrNull(this string s)
+        {
+            if (char.TryParse(s, out char result))
+            {
+                return result;
+            }
+            return null;
+        }
+
+        public static char ToCharOrDefault(this string s, char defaultValue = '\0')
+        {
+            if (char.TryParse(s, out char result))
+            {
+                return result;
+            }
+            return defaultValue;
+        }
+
+        public static short ToInt16(this string s)
+        {
+            return short.Parse(s);
+        }
+
+        public static short? ToInt16OrNull(this string s)
+        {
+            if (short.TryParse(s, out short result))
+            {
+                return result;
+            }
+            return null;
+        }
+
+        public static short ToInt16OrDefault(this string s, short defaultValue = 0)
+        {
+            if (short.TryParse(s, out short result))
+            {
+                return result;
+            }
+            return defaultValue;
+        }
+
+        public static short ToInt16(this string s, IFormatProvider formatProvider)
+        {
+            return short.Parse(s, formatProvider);
+        }
+
+        public static short ToInt16(this string s, NumberStyles numberStyles)
+        {
+            return short.Parse(s, numberStyles);
+        }
+
+        public static short ToInt16(this string s, NumberStyles numberStyles, IFormatProvider formatProvider)
+        {
+            return short.Parse(s, numberStyles, formatProvider);
+        }
+
+        public static short? ToInt16OrNull(this string s, NumberStyles numberStyles, IFormatProvider formatProvider)
+        {
+            if (short.TryParse(s, numberStyles, formatProvider, out short result))
+            {
+                return result;
+            }
+            return null;
+        }
+
+        public static short? ToInt16OrNull(this string s, NumberStyles numberStyles)
+        {
+            if (short.TryParse(s, numberStyles, null, out short result))
+            {
+                return result;
+            }
+            return null;
+        }
+
+        public static short ToInt16OrDefault(this string s, NumberStyles numberStyles, short defaultValue = 0)
+        {
+            if (short.TryParse(s, numberStyles, null, out short result))
+            {
+                return result;
+            }
+            return defaultValue;
+        }
+
+        public static short ToInt16OrDefault(this string s, NumberStyles numberStyles, IFormatProvider formatProvider, short defaultValue = 0)
+        {
+            if (short.TryParse(s, numberStyles, formatProvider, out short result))
+            {
+                return result;
+            }
+            return defaultValue;
+        }
+
+        public static ushort ToUInt16(this string s)
+        {
+            return ushort.Parse(s);
+        }
+
+        public static ushort? ToUInt16OrNull(this string s)
+        {
+            if (ushort.TryParse(s, out ushort result))
+            {
+                return result;
+            }
+            return null;
+        }
+
+        public static ushort ToUInt16OrDefault(this string s, ushort defaultValue = 0)
+        {
+            if (ushort.TryParse(s, out ushort result))
+            {
+                return result;
+            }
+            return defaultValue;
+        }
+
+        public static ushort ToUInt16(this string s, IFormatProvider formatProvider)
+        {
+            return ushort.Parse(s, formatProvider);
+        }
+
+        public static ushort ToUInt16(this string s, NumberStyles numberStyles)
+        {
+            return ushort.Parse(s, numberStyles);
+        }
+
+        public static ushort ToUInt16(this string s, NumberStyles numberStyles, IFormatProvider formatProvider)
+        {
+            return ushort.Parse(s, numberStyles, formatProvider);
+        }
+
+        public static ushort? ToUInt16OrNull(this string s, NumberStyles numberStyles, IFormatProvider formatProvider)
+        {
+            if (ushort.TryParse(s, numberStyles, formatProvider, out ushort result))
+            {
+                return result;
+            }
+            return null;
+        }
+
+        public static ushort? ToUInt16OrNull(this string s, NumberStyles numberStyles)
+        {
+            if (ushort.TryParse(s, numberStyles, null, out ushort result))
+            {
+                return result;
+            }
+            return null;
+        }
+
+        public static ushort ToUInt16OrDefault(this string s, NumberStyles numberStyles, ushort defaultValue = 0)
+        {
+            if (ushort.TryParse(s, numberStyles, null, out ushort result))
+            {
+                return result;
+            }
+            return defaultValue;
+        }
+
+        public static ushort ToUInt16OrDefault(this string s, NumberStyles numberStyles, IFormatProvider formatProvider, ushort defaultValue = 0)
+        {
+            if (ushort.TryParse(s, numberStyles, formatProvider, out ushort result))
+            {
+                return result;
+            }
+            return defaultValue;
+        }
+
+        public static int ToInt32(this string s)
+        {
+            return int.Parse(s);
+        }
+
+        public static int? ToInt32OrNull(this string s)
+        {
+            if (int.TryParse(s, out int result))
+            {
+                return result;
+            }
+            return null;
+        }
+
+        public static int ToInt32OrDefault(this string s, int defaultValue = 0)
+        {
+            if (int.TryParse(s, out int result))
+            {
+                return result;
+            }
+            return defaultValue;
+        }
+
+        public static int ToInt32(this string s, IFormatProvider formatProvider)
+        {
+            return int.Parse(s, formatProvider);
+        }
+
+        public static int ToInt32(this string s, NumberStyles numberStyles)
+        {
+            return int.Parse(s, numberStyles);
+        }
+
+        public static int ToInt32(this string s, NumberStyles numberStyles, IFormatProvider formatProvider)
+        {
+            return int.Parse(s, numberStyles, formatProvider);
+        }
+
+        public static int? ToInt32OrNull(this string s, NumberStyles numberStyles, IFormatProvider formatProvider)
+        {
+            if (int.TryParse(s, numberStyles, formatProvider, out int result))
+            {
+                return result;
+            }
+            return null;
+        }
+
+        public static int? ToInt32OrNull(this string s, NumberStyles numberStyles)
+        {
+            if (int.TryParse(s, numberStyles, null, out int result))
+            {
+                return result;
+            }
+            return null;
+        }
+
+        public static int ToInt32OrDefault(this string s, NumberStyles numberStyles, int defaultValue = 0)
+        {
+            if (int.TryParse(s, numberStyles, null, out int result))
+            {
+                return result;
+            }
+            return defaultValue;
+        }
+
+        public static int ToInt32OrDefault(this string s, NumberStyles numberStyles, IFormatProvider formatProvider, int defaultValue = 0)
+        {
+            if (int.TryParse(s, numberStyles, formatProvider, out int result))
+            {
+                return result;
+            }
+            return defaultValue;
+        }
+
+        public static uint ToUInt32(this string s)
+        {
+            return uint.Parse(s);
+        }
+
+        public static uint? ToUInt32OrNull(this string s)
+        {
+            if (uint.TryParse(s, out uint result))
+            {
+                return result;
+            }
+            return null;
+        }
+
+        public static uint ToUInt32OrDefault(this string s, uint defaultValue = 0u)
+        {
+            if (uint.TryParse(s, out uint result))
+            {
+                return result;
+            }
+            return defaultValue;
+        }
+
+        public static uint ToUInt32(this string s, IFormatProvider formatProvider)
+        {
+            return uint.Parse(s, formatProvider);
+        }
+
+        public static uint ToUInt32(this string s, NumberStyles numberStyles)
+        {
+            return uint.Parse(s, numberStyles);
+        }
+
+        public static uint ToUInt32(this string s, NumberStyles numberStyles, IFormatProvider formatProvider)
+        {
+            return uint.Parse(s, numberStyles, formatProvider);
+        }
+
+        public static uint? ToUInt32OrNull(this string s, NumberStyles numberStyles, IFormatProvider formatProvider)
+        {
+            if (uint.TryParse(s, numberStyles, formatProvider, out uint result))
+            {
+                return result;
+            }
+            return null;
+        }
+
+        public static uint? ToUInt32OrNull(this string s, NumberStyles numberStyles)
+        {
+            if (uint.TryParse(s, numberStyles, null, out uint result))
+            {
+                return result;
+            }
+            return null;
+        }
+
+        public static uint ToUInt32OrDefault(this string s, NumberStyles numberStyles, uint defaultValue = 0u)
+        {
+            if (uint.TryParse(s, numberStyles, null, out uint result))
+            {
+                return result;
+            }
+            return defaultValue;
+        }
+
+        public static uint ToUInt32OrDefault(this string s, NumberStyles numberStyles, IFormatProvider formatProvider, uint defaultValue = 0u)
+        {
+            if (uint.TryParse(s, numberStyles, formatProvider, out uint result))
+            {
+                return result;
+            }
+            return defaultValue;
+        }
+
+        public static long ToInt64(this string s)
+        {
+            return long.Parse(s);
+        }
+
+        public static long? ToInt64OrNull(this string s)
+        {
+            if (long.TryParse(s, out long result))
+            {
+                return result;
+            }
+            return null;
+        }
+
+        public static long ToInt64OrDefault(this string s, long defaultValue = 0L)
+        {
+            if (long.TryParse(s, out long result))
+            {
+                return result;
+            }
+            return defaultValue;
+        }
+
+        public static long ToInt64(this string s, IFormatProvider formatProvider)
+        {
+            return long.Parse(s, formatProvider);
+        }
+
+        public static long ToInt64(this string s, NumberStyles numberStyles)
+        {
+            return long.Parse(s, numberStyles);
+        }
+
+        public static long ToInt64(this string s, NumberStyles numberStyles, IFormatProvider formatProvider)
+        {
+            return long.Parse(s, numberStyles, formatProvider);
+        }
+
+        public static long? ToInt64OrNull(this string s, NumberStyles numberStyles, IFormatProvider formatProvider)
+        {
+            if (long.TryParse(s, numberStyles, formatProvider, out long result))
+            {
+                return result;
+            }
+            return null;
+        }
+
+        public static long? ToInt64OrNull(this string s, NumberStyles numberStyles)
+        {
+            if (long.TryParse(s, numberStyles, null, out long result))
+            {
+                return result;
+            }
+            return null;
+        }
+
+        public static long ToInt64OrDefault(this string s, NumberStyles numberStyles, long defaultValue = 0L)
+        {
+            if (long.TryParse(s, numberStyles, null, out long result))
+            {
+                return result;
+            }
+            return defaultValue;
+        }
+
+        public static long ToInt64OrDefault(this string s, NumberStyles numberStyles, IFormatProvider formatProvider, long defaultValue = 0L)
+        {
+            if (long.TryParse(s, numberStyles, formatProvider, out long result))
+            {
+                return result;
+            }
+            return defaultValue;
+        }
+
+        public static ulong ToUInt64(this string s)
+        {
+            return ulong.Parse(s);
+        }
+
+        public static ulong? ToUInt64OrNull(this string s)
+        {
+            if (ulong.TryParse(s, out ulong result))
+            {
+                return result;
+            }
+            return null;
+        }
+
+        public static ulong ToUInt64OrDefault(this string s, ulong defaultValue = 0uL)
+        {
+            if (ulong.TryParse(s, out ulong result))
+            {
+                return result;
+            }
+            return defaultValue;
+        }
+
+        public static ulong ToUInt64(this string s, IFormatProvider formatProvider)
+        {
+            return ulong.Parse(s, formatProvider);
+        }
+
+        public static ulong ToUInt64(this string s, NumberStyles numberStyles)
+        {
+            return ulong.Parse(s, numberStyles);
+        }
+
+        public static ulong ToUInt64(this string s, NumberStyles numberStyles, IFormatProvider formatProvider)
+        {
+            return ulong.Parse(s, numberStyles, formatProvider);
+        }
+
+        public static ulong? ToUInt64OrNull(this string s, NumberStyles numberStyles, IFormatProvider formatProvider)
+        {
+            if (ulong.TryParse(s, numberStyles, formatProvider, out ulong result))
+            {
+                return result;
+            }
+            return null;
+        }
+
+        public static ulong? ToUInt64OrNull(this string s, NumberStyles numberStyles)
+        {
+            if (ulong.TryParse(s, numberStyles, null, out ulong result))
+            {
+                return result;
+            }
+            return null;
+        }
+
+        public static ulong ToUInt64OrDefault(this string s, NumberStyles numberStyles, ulong defaultValue = 0uL)
+        {
+            if (ulong.TryParse(s, numberStyles, null, out ulong result))
+            {
+                return result;
+            }
+            return defaultValue;
+        }
+
+        public static ulong ToUInt64OrDefault(this string s, NumberStyles numberStyles, IFormatProvider formatProvider, ulong defaultValue = 0uL)
+        {
+            if (ulong.TryParse(s, numberStyles, formatProvider, out ulong result))
+            {
+                return result;
+            }
+            return defaultValue;
+        }
+
+        public static float ToFloat(this string s)
+        {
+            return float.Parse(s);
+        }
+
+        public static float? ToFloatOrNull(this string s)
+        {
+            if (float.TryParse(s, out float result))
+            {
+                return result;
+            }
+            return null;
+        }
+
+        public static float ToFloatOrDefault(this string s, float defaultValue = 0f)
+        {
+            if (float.TryParse(s, out float result))
+            {
+                return result;
+            }
+            return defaultValue;
+        }
+
+        public static float ToFloat(this string s, IFormatProvider formatProvider)
+        {
+            return float.Parse(s, formatProvider);
+        }
+
+        public static float ToFloat(this string s, NumberStyles numberStyles)
+        {
+            return float.Parse(s, numberStyles);
+        }
+
+        public static float ToFloat(this string s, NumberStyles numberStyles, IFormatProvider formatProvider)
+        {
+            return float.Parse(s, numberStyles, formatProvider);
+        }
+
+        public static float? ToFloatOrNull(this string s, NumberStyles numberStyles, IFormatProvider formatProvider)
+        {
+            if (float.TryParse(s, numberStyles, formatProvider, out float result))
+            {
+                return result;
+            }
+            return null;
+        }
+
+        public static float? ToFloatOrNull(this string s, NumberStyles numberStyles)
+        {
+            if (float.TryParse(s, numberStyles, null, out float result))
+            {
+                return result;
+            }
+            return null;
+        }
+
+        public static float ToFloatOrDefault(this string s, NumberStyles numberStyles, float defaultValue = 0f)
+        {
+            if (float.TryParse(s, numberStyles, null, out float result))
+            {
+                return result;
+            }
+            return defaultValue;
+        }
+
+        public static float ToFloatOrDefault(this string s, NumberStyles numberStyles, IFormatProvider formatProvider, float defaultValue = 0f)
+        {
+            if (float.TryParse(s, numberStyles, formatProvider, out float result))
+            {
+                return result;
+            }
+            return defaultValue;
+        }
+
+        public static double ToDouble(this string s)
+        {
+            return double.Parse(s);
+        }
+
+        public static double? ToDoubleOrNull(this string s)
+        {
+            if (double.TryParse(s, out double result))
+            {
+                return result;
+            }
+            return null;
+        }
+
+        public static double ToDoubleOrDefault(this string s, double defaultValue = 0.0)
+        {
+            if (double.TryParse(s, out double result))
+            {
+                return result;
+            }
+            return defaultValue;
+        }
+
+        public static double ToDouble(this string s, IFormatProvider formatProvider)
+        {
+            return double.Parse(s, formatProvider);
+        }
+
+        public static double ToDouble(this string s, NumberStyles numberStyles)
+        {
+            return double.Parse(s, numberStyles);
+        }
+
+        public static double ToDouble(this string s, NumberStyles numberStyles, IFormatProvider formatProvider)
+        {
+            return double.Parse(s, numberStyles, formatProvider);
+        }
+
+        public static double? ToDoubleOrNull(this string s, NumberStyles numberStyles, IFormatProvider formatProvider)
+        {
+            if (double.TryParse(s, numberStyles, formatProvider, out double result))
+            {
+                return result;
+            }
+            return null;
+        }
+
+        public static double? ToDoubleOrNull(this string s, NumberStyles numberStyles)
+        {
+            if (double.TryParse(s, numberStyles, null, out double result))
+            {
+                return result;
+            }
+            return null;
+        }
+
+        public static double ToDoubleOrDefault(this string s, NumberStyles numberStyles, double defaultValue = 0.0)
+        {
+            if (double.TryParse(s, numberStyles, null, out double result))
+            {
+                return result;
+            }
+            return defaultValue;
+        }
+
+        public static double ToDoubleOrDefault(this string s, NumberStyles numberStyles, IFormatProvider formatProvider, double defaultValue = 0.0)
+        {
+            if (double.TryParse(s, numberStyles, formatProvider, out double result))
+            {
+                return result;
+            }
+            return defaultValue;
+        }
+
+        public static decimal ToDecimal(this string s)
+        {
+            return decimal.Parse(s);
+        }
+
+        public static decimal? ToDecimalOrNull(this string s)
+        {
+            if (decimal.TryParse(s, out decimal result))
+            {
+                return result;
+            }
+            return null;
+        }
+
+        public static decimal ToDecimalOrDefault(this string s, decimal defaultValue = default(decimal))
+        {
+            if (decimal.TryParse(s, out decimal result))
+            {
+                return result;
+            }
+            return defaultValue;
+        }
+
+        public static decimal ToDecimal(this string s, IFormatProvider formatProvider)
+        {
+            return decimal.Parse(s, formatProvider);
+        }
+
+        public static decimal ToDecimal(this string s, NumberStyles numberStyles)
+        {
+            return decimal.Parse(s, numberStyles);
+        }
+
+        public static decimal ToDecimal(this string s, NumberStyles numberStyles, IFormatProvider formatProvider)
+        {
+            return decimal.Parse(s, numberStyles, formatProvider);
+        }
+
+        public static decimal? ToDecimalOrNull(this string s, NumberStyles numberStyles, IFormatProvider formatProvider)
+        {
+            if (decimal.TryParse(s, numberStyles, formatProvider, out decimal result))
+            {
+                return result;
+            }
+            return null;
+        }
+
+        public static decimal? ToDecimalOrNull(this string s, NumberStyles numberStyles)
+        {
+            if (decimal.TryParse(s, numberStyles, null, out decimal result))
+            {
+                return result;
+            }
+            return null;
+        }
+
+        public static decimal ToDecimalOrDefault(this string s, NumberStyles numberStyles, decimal defaultValue = default(decimal))
+        {
+            if (decimal.TryParse(s, numberStyles, null, out decimal result))
+            {
+                return result;
+            }
+            return defaultValue;
+        }
+
+        public static decimal ToDecimalOrDefault(this string s, NumberStyles numberStyles, IFormatProvider formatProvider, decimal defaultValue = default(decimal))
+        {
+            if (decimal.TryParse(s, numberStyles, formatProvider, out decimal result))
+            {
+                return result;
+            }
+            return defaultValue;
+        }
+
+        public static DateTime ToDateTime(this string s)
+        {
+            return DateTime.Parse(s);
+        }
+
+        public static DateTime? ToDateTimeOrNull(this string s)
+        {
+            if (DateTime.TryParse(s, out DateTime result))
+            {
+                return result;
+            }
+            return null;
+        }
+
+        public static DateTime ToDateTimeOrDefault(this string s, DateTime defaultValue = default(DateTime))
+        {
+            if (DateTime.TryParse(s, out DateTime result))
+            {
+                return result;
+            }
+            return defaultValue;
+        }
+
+        public static DateTime ToDateTime(this string s, IFormatProvider formatProvider)
+        {
+            return DateTime.Parse(s, formatProvider);
+        }
+
+        public static DateTime ToDateTime(this string s, IFormatProvider formatProvider, DateTimeStyles dateTimeStyles)
+        {
+            return DateTime.Parse(s, formatProvider, dateTimeStyles);
+        }
+
+        public static DateTime? ToDateTimeOrNull(this string s, DateTimeStyles dateTimeStyles)
+        {
+            if (DateTime.TryParse(s, null, dateTimeStyles, out DateTime result))
+            {
+                return result;
+            }
+            return null;
+        }
+
+        public static DateTime ToDateTimeOrDefault(this string s, DateTimeStyles dateTimeStyles, DateTime defaultValue = default(DateTime))
+        {
+            if (DateTime.TryParse(s, null, dateTimeStyles, out DateTime result))
+            {
+                return result;
+            }
+            return defaultValue;
+        }
+
+        public static DateTime? ToDateTimeOrNull(this string s, IFormatProvider formatProvider, DateTimeStyles dateTimeStyles)
+        {
+            if (DateTime.TryParse(s, formatProvider, dateTimeStyles, out DateTime result))
+            {
+                return result;
+            }
+            return null;
+        }
+
+        public static DateTime ToDateTimeOrDefault(this string s, IFormatProvider formatProvider, DateTimeStyles dateTimeStyles, DateTime defaultValue = default(DateTime))
+        {
+            if (DateTime.TryParse(s, formatProvider, dateTimeStyles, out DateTime result))
+            {
+                return result;
+            }
+            return defaultValue;
+        }
+
+        public static bool ToBoolean(this string s)
+        {
+            return bool.Parse(s);
+        }
+
+        public static bool? ToBooleanOrNull(this string s)
+        {
+            if (bool.TryParse(s, out bool result))
+            {
+                return result;
+            }
+            return null;
+        }
+
+        public static bool ToBooleanOrDefault(this string s, bool defaultValue = false)
+        {
+            if (bool.TryParse(s, out bool result))
+            {
+                return result;
+            }
+            return defaultValue;
+        }
+
+        #endregion
+
     }
 }

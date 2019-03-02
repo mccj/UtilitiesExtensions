@@ -1,4 +1,7 @@
 ﻿
+using System.ComponentModel;
+using System.Reflection;
+
 namespace System.Linq
 {
     /// <summary>
@@ -32,5 +35,20 @@ namespace System.Linq
         //    var member = type.GetMember(value.ToString()).FirstOrDefault();
         //    return member != null ? member.ToDescription() : value.ToString();
         //}
+
+        public static string GetDescription(this Enum en)
+        {
+            Type type = en.GetType();
+            MemberInfo[] member = type.GetMember(en.ToString());
+            if (member != null && member.Length != 0)
+            {
+                object[] customAttributes = member[0].GetCustomAttributes(typeof(DescriptionAttribute), false);
+                if (customAttributes != null && customAttributes.Length != 0)
+                {
+                    return ((DescriptionAttribute)customAttributes[0]).Description;
+                }
+            }
+            return en.ToString();
+        }
     }
 }

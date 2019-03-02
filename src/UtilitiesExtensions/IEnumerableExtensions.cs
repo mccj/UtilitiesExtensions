@@ -1,6 +1,6 @@
 namespace System.Linq
 {
-    using Orchard.Utility;
+    using UtilitiesExtensions.Utility;
     using System.Collections.Generic;
     using System.Diagnostics;
     using System.Linq;
@@ -154,7 +154,7 @@ namespace System.Linq
         //}
         //private static bool IsLogged(Exception ex)
         //{
-        //    return ex is Orchard.Security.OrchardSecurityException || !ex.IsFatal();
+        //    return ex is UtilitiesExtensions.Security.UtilitiesExtensionsSecurityException || !ex.IsFatal();
         //}
 
 

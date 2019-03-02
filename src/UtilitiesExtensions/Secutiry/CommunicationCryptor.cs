@@ -4,7 +4,7 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 
-namespace Orchard.Utility.Secutiry
+namespace UtilitiesExtensions.Utility.Secutiry
 {
     /// <summary>
     /// 结合RSA，DES的通信加密解密操作类

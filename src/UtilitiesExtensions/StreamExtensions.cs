@@ -17,7 +17,7 @@ namespace System.Linq
         ///// <returns> 是返回True，不是返回False </returns>
         //public static string ToMd5Hash(this System.IO.Stream stream)
         //{
-        //    return Orchard.Utility.Secutiry.HashHelper.GetMd5(stream);
+        //    return UtilitiesExtensions.Utility.Secutiry.HashHelper.GetMd5(stream);
         //}
         /// <summary>
         /// 将 Stream 转成 byte[]

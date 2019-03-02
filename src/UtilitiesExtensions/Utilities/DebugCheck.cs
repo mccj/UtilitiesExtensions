@@ -1,14 +1,7 @@
 ﻿// Copyright (c) Microsoft Open Technologies, Inc. All rights reserved. See License.txt in the project root for license information.
 
-#if SQLSERVER
-namespace System.Data.Entity.SqlServer.Utilities
-#elif SQLSERVERCOMPACT
-namespace System.Data.Entity.SqlServerCompact.Utilities
-#elif EF_FUNCTIONALS
-namespace System.Data.Entity.Functionals.Utilities
-#else
-namespace Orchard.Utility
-#endif
+
+namespace UtilitiesExtensions.Utility
 {
     using System.Diagnostics;
 

@@ -20,6 +20,14 @@ namespace System.Linq
             do
             {
                 err += eee.Message + "\r\n";
+                if(eee is AggregateException)
+                {
+                    var dsd = eee as AggregateException;
+                    foreach (var item in dsd.InnerExceptions)
+                    {
+                        err += item.DetailMessage() + "\r\n";
+                    }   
+                }
                 eee = eee.InnerException;
             } while (eee != null);
             return err;
@@ -62,7 +70,7 @@ namespace System.Linq
 
         //public static bool IsCatchableExceptionType(this Exception e)
         //{
-        //    Orchard.Utility.DebugCheck.NotNull(e);
+        //    UtilitiesExtensions.Utility.DebugCheck.NotNull(e);
 
         //    // a 'catchable' exception is defined by what it is not.
         //    var type = e.GetType();

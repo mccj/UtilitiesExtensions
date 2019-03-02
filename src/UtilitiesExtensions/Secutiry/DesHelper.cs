@@ -6,7 +6,7 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 
-namespace Orchard.Utility.Secutiry
+namespace UtilitiesExtensions.Utility.Secutiry
 {
     /// <summary>
     /// DES / TripleDES加密解密操作类

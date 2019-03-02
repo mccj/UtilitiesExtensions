@@ -2,7 +2,7 @@
 
 namespace System.Data.Entity.Utilities
 {
-    using Orchard.Utility;
+    using UtilitiesExtensions.Utility;
     using System.Collections.Generic;
     using System.Linq;
     using System.Xml.Linq;
