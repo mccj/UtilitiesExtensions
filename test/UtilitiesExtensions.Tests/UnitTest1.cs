@@ -1,15 +1,14 @@
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Linq;
-namespace UtilitiesExtensionsTest
+using System;
+using Xunit;
+
+namespace XUnitTestProject1
 {
-    [TestClass]
     public class UnitTest1
     {
-        [TestMethod]
-        public void TestMethod1()
+        [Fact]
+        public void Test1()
         {
-          var i=  "0001".AsInt();
-            Assert.AreEqual(i, 1);
+
         }
     }
 }

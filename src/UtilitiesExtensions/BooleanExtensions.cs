@@ -9,9 +9,13 @@ namespace System.Linq
         /// <summary>
         /// 把布尔值转换为小写字符串
         /// </summary>
-        public static string ToLower(this bool value)
+        public static string ToLowerString(this bool value)
         {
             return value.ToString().ToLower();
+        }
+        public static string ToUpperString(this bool value)
+        {
+            return value.ToString().ToUpper();
         }
         /// <summary>
         /// 取反
