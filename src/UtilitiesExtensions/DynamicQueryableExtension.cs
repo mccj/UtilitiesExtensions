@@ -6,14 +6,16 @@ namespace System.Linq
 {
     public static class DynamicQueryableExtension
     {
-        public static IEnumerable<T> OrderBy<T>(this IEnumerable<T> source, string ordering, string defaultValue = null)
+        public static IEnumerable<TModel> OrderBy<TModel>(this IEnumerable<TModel> source, string ordering, string defaultValue = null)
         {
-            if (!string.IsNullOrWhiteSpace(ordering))
-                return DynamicQueryableExtension.OrderBy(source, ordering);
-            else if (!string.IsNullOrWhiteSpace(defaultValue))
-                return DynamicQueryableExtension.OrderBy(source, defaultValue);
-            else
-                return source;
+            var s = source.AsQueryable();
+            return DynamicQueryableExtension.OrderBy(s, ordering, defaultValue);
+            //if (!string.IsNullOrWhiteSpace(ordering))
+            //    return System.Linq.Dynamic.Core.DynamicQueryableExtensions.OrderBy(source, ordering);
+            //else if (!string.IsNullOrWhiteSpace(defaultValue))
+            //    return System.Linq.Dynamic.Core.DynamicQueryableExtensions.OrderBy(source, defaultValue);
+            //else
+            //    return source;
         }
         public static IEnumerable<TModel> OrderBy<TModel>(this IEnumerable<TModel> source, string ordering, Func<IEnumerable<TModel>, IEnumerable<TModel>> defaultexpressions)
         {
@@ -28,9 +30,9 @@ namespace System.Linq
         public static IQueryable<TModel> OrderBy<TModel>(this IQueryable<TModel> source, string ordering, string defaultValue = null)
         {
             if (!string.IsNullOrWhiteSpace(ordering))
-                return DynamicQueryableExtension.OrderBy(source, ordering);
+                return System.Linq.Dynamic.Core.DynamicQueryableExtensions.OrderBy(source, ordering);
             else if (!string.IsNullOrWhiteSpace(defaultValue))
-                return DynamicQueryableExtension.OrderBy(source, defaultValue);
+                return System.Linq.Dynamic.Core.DynamicQueryableExtensions.OrderBy(source, defaultValue);
             else
                 return source;
         }
@@ -44,26 +46,25 @@ namespace System.Linq
             }
             return source;
         }
-
-        //public static IQueryable<TModel> OrderBy<TModel>(this IQueryable<TModel> source, string ordering, params Expression<Func<TModel, object>>[] defaultexpressions)
-        //{
-        //    if (!string.IsNullOrWhiteSpace(ordering))
-        //        return DynamicQueryable.OrderBy(source, ordering);
-        //    else if (defaultexpressions != null)
-        //    {
-        //        var ss = source;
-        //        foreach (var item in defaultexpressions)
-        //        {
-        //            ss = ss.OrderBy(item);
-        //        }
-        //        return ss;
-        //    }
-        //    return source;
-        //}
+        public static IQueryable<TModel> OrderBy<TModel>(this IQueryable<TModel> source, string ordering, params Expression<Func<TModel, object>>[] defaultexpressions)
+        {
+            if (!string.IsNullOrWhiteSpace(ordering))
+                return DynamicQueryableExtension.OrderBy(source, ordering);
+            else if (defaultexpressions != null)
+            {
+                var ss = source;
+                foreach (var item in defaultexpressions)
+                {
+                    ss = ss.OrderBy(item);
+                }
+                return ss;
+            }
+            return source;
+        }
         //public static IQueryable<TModel> OrderByDescending<TModel>(this IQueryable<TModel> source, string ordering, params Expression<Func<TModel, object>>[] defaultexpressions)
         //{
         //    if (!string.IsNullOrWhiteSpace(ordering))
-        //        return DynamicQueryable.OrderBy(source, ordering);
+        //        return DynamicQueryableExtension.OrderBy(source, ordering);
         //    else if (defaultexpressions != null)
         //    {
         //        var ss = source;
@@ -75,19 +76,33 @@ namespace System.Linq
         //    }
         //    return source;
         //}
+
+
         public static IEnumerable<T> Where<T>(this IEnumerable<T> source, string predicate, string defaultValue = null)
         {
+            var s = source.AsQueryable();
+            return DynamicQueryableExtension.Where(s, predicate, defaultValue);
+
+            //if (!string.IsNullOrWhiteSpace(predicate))
+            //    return DynamicQueryableExtension.Where(source, predicate);
+            //else if (!string.IsNullOrWhiteSpace(defaultValue))
+            //    return DynamicQueryableExtension.Where(source, defaultValue);
+            //else
+            //    return source;
+        }
+        public static IEnumerable<T> Where<T>(this IQueryable<T> source, string predicate, string defaultValue = null)
+        {
             if (!string.IsNullOrWhiteSpace(predicate))
-                return DynamicQueryableExtension.Where(source, predicate);
+                return System.Linq.Dynamic.Core.DynamicQueryableExtensions.Where(source, predicate);
             else if (!string.IsNullOrWhiteSpace(defaultValue))
-                return DynamicQueryableExtension.Where(source, defaultValue);
+                return System.Linq.Dynamic.Core.DynamicQueryableExtensions.Where(source, defaultValue);
             else
                 return source;
         }
         public static IQueryable<T> Where<T>(this IQueryable<T> source, string predicate, params Expression<Func<T, bool>>[] defaultPredicate)
         {
             if (!string.IsNullOrWhiteSpace(predicate))
-                return DynamicQueryableExtension.Where(source, predicate);
+                return System.Linq.Dynamic.Core.DynamicQueryableExtensions.Where(source, predicate);
             else if (defaultPredicate != null)
             {
                 var ss = source;
@@ -100,10 +115,6 @@ namespace System.Linq
             else
                 return source;
         }
-
-
-
-
         public static IEnumerable<TResult> LeftJoin<TOuter, TInner, TKey, TResult>(this IEnumerable<TOuter> outer, IEnumerable<TInner> inner, Func<TOuter, TKey> outerKeySelector, Func<TInner, TKey> innerKeySelector, Func<TOuter, TInner, TResult> resultSelector)
         {
             return (from outerItem in outer
