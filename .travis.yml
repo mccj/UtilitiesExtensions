@@ -7,7 +7,7 @@ os:                 #设定测试操作系统
 mono:               #Mono版本,可以指定为 latest
   - none
 dotnet:
-  - 2.2.300
+  - latest
 script:             #脚本
 #  - if test "$TRAVIS_OS_NAME" == "linux"; then 
 #        curl https://raw.githubusercontent.com/dotnet/cli/master/scripts/obtain/dotnet-install.sh | bash /dev/stdin --version 2.2.103;
