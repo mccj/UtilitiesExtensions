@@ -6,8 +6,8 @@ os:                 #设定测试操作系统
 #  - osx
 mono:               #Mono版本,可以指定为 latest
   - none
- dotnet:
-  - 2.2.103
+# dotnet:
+#  - 2.2.103
 script:             #脚本
   - true
 #  - if test "$TRAVIS_OS_NAME" == "linux"; then 
