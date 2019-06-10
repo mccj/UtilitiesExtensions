@@ -14,8 +14,8 @@ script:             #½Å±¾
 #  - dir %WINDIR%\Microsoft.Net\Framework\v* /B
   - dotnet --info
   - dotnet build -c Release
-  - dotnet publish -c Release
-  - true
+#  - dotnet publish -c Release
+#  - true
 
 
 
