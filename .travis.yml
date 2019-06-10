@@ -7,8 +7,11 @@ os:                 #设定测试操作系统
 mono:               #Mono版本,可以指定为 latest
   - none
 script:             #脚本
-  - dotnet restore
-  - dotnet test
+  - curl https://raw.githubusercontent.com/dotnet/cli/master/scripts/obtain/dotnet-install.sh | bash /dev/stdin --version 2.2.103
+#  - if test "$TRAVIS_OS_NAME" == "linux"; then export PATH="/home/travis/.dotnet":"$PATH"; fi
+  - dotnet --info
+  - dotnet build -c Release
+
 #dotnet: 2.1.502
 #script:
 # - dotnet restore
