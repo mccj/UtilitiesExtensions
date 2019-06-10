@@ -3,7 +3,7 @@ sudo:       required        #需要sudo权限
 os:                         #设定测试操作系统
   - linux
   - osx
-mono:       none            #Mono版本,可以指定为 latest,none
+mono:       latest            #Mono版本,可以指定为 latest,none
 #dotnet:     2.1.502         #dotnet版本
 install:
   - curl https://raw.githubusercontent.com/dotnet/cli/master/scripts/obtain/dotnet-install.sh | bash /dev/stdin --version 2.2.107
