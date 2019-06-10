@@ -2,11 +2,11 @@ language: csharp    #设定编译语言
 sudo: required      #需要sudo权限
 os:                 #设定测试操作系统
   - linux
-  - windows
-#  - osx
-mono:               #Mono版本,可以指定为 latest
-  - none
-dotnet: 2.1.502     #dotnet版本
+  - osx
+mono:               #Mono版本,可以指定为 latest,none
+  - latest
+dotnet:             #dotnet版本
+  - 2.2.300
 script:             #脚本
 #  - if test "$TRAVIS_OS_NAME" == "linux"; then 
 #        curl https://raw.githubusercontent.com/dotnet/cli/master/scripts/obtain/dotnet-install.sh | bash /dev/stdin --version 2.2.103;
