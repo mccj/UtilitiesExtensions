@@ -3,8 +3,10 @@
 常用方法的扩展库
 
 ## 构建状态
+[![Build status](https://ci.appveyor.com/api/projects/status/wr437n4svotfsrsk?svg=true)](https://ci.appveyor.com/project/mccj/utilitiesextensions)
 [![Build Status](https://travis-ci.org/mccj/UtilitiesExtensions.svg?branch=master)](https://travis-ci.org/mccj/UtilitiesExtensions)
-
+[![MyGet](https://img.shields.io/myget/mccj/vpre/UtilitiesExtensions.svg)](https://myget.org/feed/mccj/package/nuget/UtilitiesExtensions)
+[![NuGet](https://img.shields.io/nuget/v/UtilitiesExtensions.svg)](https://www.nuget.org/packages/UtilitiesExtensions)
 <!--
 Stable (master): 
 
@@ -15,7 +17,6 @@ Stable (master):
 <!--
 Nightly (dev): 
 
-[![Build status](https://ci.appveyor.com/api/projects/status/wr437n4svotfsrsk?svg=true)](https://ci.appveyor.com/project/mccj/utilitiesextensions)
 [![MyGet](https://img.shields.io/myget/orchardcore-preview/vpre/OrchardCore.Application.Cms.Targets.svg)](https://myget.org/feed/orchardcore-preview/package/nuget/OrchardCore.Application.Cms.Targets)
 -->
 
