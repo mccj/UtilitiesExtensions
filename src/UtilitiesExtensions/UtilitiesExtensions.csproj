@@ -3,11 +3,12 @@
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;NET461</TargetFrameworks>
     <Description>Library for various useful C# extensions</Description>
+    <Version>1.0.1.0-beta1</Version>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="System.Data.DataSetExtensions" Version="4.5.0" />
-    <PackageReference Include="System.Linq.Dynamic.Core" Version="1.0.12" />
+    <PackageReference Include="System.Linq.Dynamic.Core" Version="1.0.16" />
   </ItemGroup>
 
 </Project>
