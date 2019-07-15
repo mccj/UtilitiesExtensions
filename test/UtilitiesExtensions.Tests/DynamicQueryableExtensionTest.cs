@@ -8,7 +8,7 @@ namespace UtilitiesExtensionsTest
 {
     public class DynamicQueryableExtensionTest
     {
-        private readonly Tm[] tms=new []{new Tm    { Name="a", Age=5}, new Tm { Name = "b", Age = 6 } };
+        private readonly Tm[] tms = new[] { new Tm { Name = "a", Age = 5 }, new Tm { Name = "b", Age = 6 } };
         public DynamicQueryableExtensionTest()
         {
 
@@ -50,8 +50,8 @@ namespace UtilitiesExtensionsTest
         [Fact]
         public void ToHashSetTest()
         {
-          var r=  tms.ToHashSet();
-
+            var r = tms.ToHashSet();
+            Assert.Equal("HashSet`1", r.GetType().Name);
         }
 
         //[TestMethod]
