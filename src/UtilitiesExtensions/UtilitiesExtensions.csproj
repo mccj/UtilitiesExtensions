@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;NET45;NET472</TargetFrameworks>
     <Description>Library for various useful C# extensions</Description>
-    <Version>1.0.1.0-beta2</Version>
+    <Version>1.0.1.0-beta-2</Version>
   </PropertyGroup>
   <PropertyGroup Condition="'$(TargetFramework)'=='NET45'">
     <DefineConstants>NETFULL</DefineConstants>
