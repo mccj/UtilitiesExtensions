@@ -14,7 +14,7 @@ namespace UtilitiesExtensionsTest
 
         }
         [Fact]
-        public void StringExtensionsTest()
+        public void OrderByTest()
         {
             var s1 = DynamicQueryableExtension.OrderBy(tms, "Age").FirstOrDefault();
             var s2 = DynamicQueryableExtension.OrderBy(tms, "Age desc").FirstOrDefault();
@@ -46,6 +46,12 @@ namespace UtilitiesExtensionsTest
             //Assert.Null("!00".ToInt32OrNull());
             //Assert.Null(@"QQQ,999\".ToInt32OrNull(NumberStyles.Currency));
             //Assert.Null("9!9999!9999ルピー".ToInt32OrNull(NumberStyles.Currency, numFormat));
+        }
+        [Fact]
+        public void ToHashSetTest()
+        {
+          var r=  tms.ToHashSet();
+
         }
 
         //[TestMethod]

@@ -1,8 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>netcoreapp2.0;NET461</TargetFrameworks>
-
+    <TargetFrameworks>netcoreapp2.0;NET45;NET451;NET452;NET46;NET461;NET462;NET47;NET471;NET472;NET48</TargetFrameworks>
+<!--NET35;NET4;-->
     <IsPackable>false</IsPackable>
   </PropertyGroup>
 
