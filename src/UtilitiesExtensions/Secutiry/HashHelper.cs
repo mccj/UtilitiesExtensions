@@ -1,6 +1,6 @@
-﻿using System.Security.Cryptography;
+﻿using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
-using System.Linq;
 namespace UtilitiesExtensions.Utility.Secutiry
 {
     /// <summary>

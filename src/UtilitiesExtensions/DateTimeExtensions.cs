@@ -1,9 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Data;
-using System.Diagnostics;
-using System.Reflection;
-
-namespace System.Linq
+﻿namespace System.Linq
 {
     public static class DateTimeExtensions
     {

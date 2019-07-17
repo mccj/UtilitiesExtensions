@@ -20,13 +20,13 @@ namespace System.Linq
             do
             {
                 err += eee.Message + "\r\n";
-                if(eee is AggregateException)
+                if (eee is AggregateException)
                 {
                     var dsd = eee as AggregateException;
                     foreach (var item in dsd.InnerExceptions)
                     {
                         err += item.DetailMessage() + "\r\n";
-                    }   
+                    }
                 }
                 eee = eee.InnerException;
             } while (eee != null);

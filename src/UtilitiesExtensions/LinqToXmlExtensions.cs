@@ -8,7 +8,7 @@ namespace System.Linq
     /// </summary>
     public static class LinqToXmlExtensions
     {
-       #region 公共方法
+        #region 公共方法
 
         /// <summary>
         /// 将XmlNode转换为XElement

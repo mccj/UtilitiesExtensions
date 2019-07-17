@@ -2,10 +2,10 @@
 
 namespace System.Data.Entity.Utilities
 {
-    using UtilitiesExtensions.Utility;
     using System.Collections.Generic;
     using System.Linq;
     using System.Xml.Linq;
+    using UtilitiesExtensions.Utility;
 
     internal static class XContainerExtensions
     {

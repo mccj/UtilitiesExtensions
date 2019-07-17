@@ -1,7 +1,68 @@
-using System;
+using System
+/* 项目“UtilitiesExtensions.Tests (NET46)”的未合并的更改
+在此之前:
 using System.Text;
+在此之后:
 using System.Globalization;
-using System.Linq;
+*/
+
+/* 项目“UtilitiesExtensions.Tests (NET45)”的未合并的更改
+在此之前:
+using System.Text;
+在此之后:
+using System.Globalization;
+*/
+
+/* 项目“UtilitiesExtensions.Tests (NET48)”的未合并的更改
+在此之前:
+using System.Text;
+在此之后:
+using System.Globalization;
+*/
+
+/* 项目“UtilitiesExtensions.Tests (NET452)”的未合并的更改
+在此之前:
+using System.Text;
+在此之后:
+using System.Globalization;
+*/
+
+/* 项目“UtilitiesExtensions.Tests (NET451)”的未合并的更改
+在此之前:
+using System.Text;
+在此之后:
+using System.Globalization;
+*/
+
+/* 项目“UtilitiesExtensions.Tests (NET471)”的未合并的更改
+在此之前:
+using System.Text;
+在此之后:
+using System.Globalization;
+*/
+
+/* 项目“UtilitiesExtensions.Tests (NET472)”的未合并的更改
+在此之前:
+using System.Text;
+在此之后:
+using System.Globalization;
+*/
+
+/* 项目“UtilitiesExtensions.Tests (NET461)”的未合并的更改
+在此之前:
+using System.Text;
+在此之后:
+using System.Globalization;
+*/
+
+/* 项目“UtilitiesExtensions.Tests (NET462)”的未合并的更改
+在此之前:
+using System.Text;
+在此之后:
+using System.Globalization;
+*/
+.Linq;
+using System.Text;
 using Xunit;
 
 namespace UtilitiesExtensionsTest

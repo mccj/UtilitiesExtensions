@@ -1,4 +1,6 @@
-﻿using System;
+﻿
+/* 项目“UtilitiesExtensions (NET45)”的未合并的更改
+在此之前:
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
@@ -8,7 +10,40 @@ using System.Dynamic;
 using System.ComponentModel;
 using System.Collections;
 using System.Reflection;
+在此之后:
+using System.Collections;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Dynamic;
+using System.Linq;
+using System.Linq.Expressions;
+using System.Reflection;
+using System.Text;
+using System.Threading.Tasks;
+*/
 
+/* 项目“UtilitiesExtensions (NET472)”的未合并的更改
+在此之前:
+using System.Collections.Generic;
+using System.Linq;
+using System.Linq.Expressions;
+using System.Text;
+using System.Threading.Tasks;
+using System.Dynamic;
+using System.ComponentModel;
+using System.Collections;
+using System.Reflection;
+在此之后:
+using System.Collections;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Dynamic;
+using System.Linq;
+using System.Linq.Expressions;
+using System.Reflection;
+using System.Text;
+using System.Threading.Tasks;
+*/
 namespace System.Linq
 {
     /// <summary>
