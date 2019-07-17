@@ -99,6 +99,15 @@ namespace System.Linq
             else
                 return source;
         }
+        public static IEnumerable<T> Where<T>(this IEnumerable<T> source, string predicate, params object[] args)
+        {
+            return System.Linq.Dynamic.Core.DynamicQueryableExtensions.Where(source.AsQueryable(), predicate, args);
+        }
+        public static Collections.IEnumerable Select<T>(this IEnumerable<T> source, string predicate, params object[] args)
+        {
+            return System.Linq.Dynamic.Core.DynamicQueryableExtensions.Select(source.AsQueryable(), predicate, args);
+        }
+
         public static IQueryable<T> Where<T>(this IQueryable<T> source, string predicate, params Expression<Func<T, bool>>[] defaultPredicate)
         {
             if (!string.IsNullOrWhiteSpace(predicate))
@@ -155,6 +164,7 @@ namespace System.Linq
         {
             foreach (object obj in source) yield return (TResult)(obj ?? default(TResult));
         }
+
 #if NETFULL
         public static System.Collections.Generic.HashSet<T> ToHashSet<T>(this System.Collections.Generic.IEnumerable<T> source)
         {
