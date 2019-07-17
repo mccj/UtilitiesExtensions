@@ -1,42 +1,4 @@
 ﻿using System.Collections.Generic;
-/* 项目“UtilitiesExtensions (NET45)”的未合并的更改
-在此之前:
-using System.Linq;
-using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
-using System.Text.RegularExpressions;
-using System.Globalization;
-using System.IO;
-在此之后:
-using System.Globalization;
-using System.IO;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
-*/
-
-/* 项目“UtilitiesExtensions (NET472)”的未合并的更改
-在此之前:
-using System.Linq;
-using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
-using System.Text.RegularExpressions;
-using System.Globalization;
-using System.IO;
-在此之后:
-using System.Globalization;
-using System.IO;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
-*/
-
 
 namespace System.Linq
 {

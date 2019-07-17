@@ -1,37 +1,5 @@
 ﻿using System.Collections.Generic;
-
-/* 项目“UtilitiesExtensions (NET45)”的未合并的更改
-在此之前:
-using System.Linq;
-在此之后:
 using System.IO;
-using System.Linq;
-*/
-
-/* 项目“UtilitiesExtensions (NET472)”的未合并的更改
-在此之前:
-using System.Linq;
-在此之后:
-using System.IO;
-using System.Linq;
-*/
-using System.
-/* 项目“UtilitiesExtensions (NET45)”的未合并的更改
-在此之前:
-using System.Threading.Tasks;
-using System.IO;
-在此之后:
-using System.Threading.Tasks;
-*/
-
-/* 项目“UtilitiesExtensions (NET472)”的未合并的更改
-在此之前:
-using System.Threading.Tasks;
-using System.IO;
-在此之后:
-using System.Threading.Tasks;
-*/
-IO;
 
 namespace System.Linq
 {

@@ -1,21 +1,7 @@
 namespace System.Linq
 {
-
-/* 项目“UtilitiesExtensions (NET45)”的未合并的更改
-在此之前:
-    using UtilitiesExtensions.Utility;
-在此之后:
     using System.Collections.Generic;
-*/
-
-/* 项目“UtilitiesExtensions (NET472)”的未合并的更改
-在此之前:
-    using UtilitiesExtensions.Utility;
-在此之后:
-    using System.Collections.Generic;
-*/
     using System.Diagnostics;
-    using System.Linq;
     using UtilitiesExtensions.Utility;
 
     [DebuggerStepThrough]
@@ -401,5 +387,12 @@ namespace System.Linq
             }
         }
 
+        public static TResult Max<TSource, TResult>(this IEnumerable<TSource> source, Func<TSource, TResult> selector, TResult defaultValue = default(TResult))
+        {
+            if (source.Any())
+                return Enumerable.Max(source, selector);
+            else
+                return defaultValue;
+        }
     }
 }
