@@ -166,7 +166,7 @@ namespace System.Linq
             foreach (object obj in source) yield return (TResult)(obj ?? default(TResult));
         }
 
-#if NETFULL
+#if (NET45 )
         public static System.Collections.Generic.HashSet<T> ToHashSet<T>(this System.Collections.Generic.IEnumerable<T> source)
         {
             return new HashSet<T>(source);
