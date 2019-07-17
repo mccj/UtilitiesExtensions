@@ -57,6 +57,6 @@ namespace System.Linq
                         throw new Exception("类型不一致");
                 }
             }
-        }
+        }        
     }
 }
