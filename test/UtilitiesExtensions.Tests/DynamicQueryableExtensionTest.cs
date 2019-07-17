@@ -1,85 +1,5 @@
-﻿using System
-/* 项目“UtilitiesExtensions.Tests (NET46)”的未合并的更改
-在此之前:
+﻿using System.Linq;
 using System.Text;
-using System.Globalization;
-在此之后:
-using System.Globalization;
-using System.Linq;
-*/
-
-/* 项目“UtilitiesExtensions.Tests (NET45)”的未合并的更改
-在此之前:
-using System.Text;
-using System.Globalization;
-在此之后:
-using System.Globalization;
-using System.Linq;
-*/
-
-/* 项目“UtilitiesExtensions.Tests (NET48)”的未合并的更改
-在此之前:
-using System.Text;
-using System.Globalization;
-在此之后:
-using System.Globalization;
-using System.Linq;
-*/
-
-/* 项目“UtilitiesExtensions.Tests (NET452)”的未合并的更改
-在此之前:
-using System.Text;
-using System.Globalization;
-在此之后:
-using System.Globalization;
-using System.Linq;
-*/
-
-/* 项目“UtilitiesExtensions.Tests (NET451)”的未合并的更改
-在此之前:
-using System.Text;
-using System.Globalization;
-在此之后:
-using System.Globalization;
-using System.Linq;
-*/
-
-/* 项目“UtilitiesExtensions.Tests (NET471)”的未合并的更改
-在此之前:
-using System.Text;
-using System.Globalization;
-在此之后:
-using System.Globalization;
-using System.Linq;
-*/
-
-/* 项目“UtilitiesExtensions.Tests (NET472)”的未合并的更改
-在此之前:
-using System.Text;
-using System.Globalization;
-在此之后:
-using System.Globalization;
-using System.Linq;
-*/
-
-/* 项目“UtilitiesExtensions.Tests (NET461)”的未合并的更改
-在此之前:
-using System.Text;
-using System.Globalization;
-在此之后:
-using System.Globalization;
-using System.Linq;
-*/
-
-/* 项目“UtilitiesExtensions.Tests (NET462)”的未合并的更改
-在此之前:
-using System.Text;
-using System.Globalization;
-在此之后:
-using System.Globalization;
-using System.Linq;
-*/
-.Text;
 using Xunit;
 
 namespace UtilitiesExtensionsTest
@@ -94,8 +14,8 @@ namespace UtilitiesExtensionsTest
         [Fact]
         public void OrderByTest()
         {
-            var s1 = DynamicQueryableExtension.OrderBy(tms, "Age").FirstOrDefault();
-            var s2 = DynamicQueryableExtension.OrderBy(tms, "Age desc").FirstOrDefault();
+            var s1 = DynamicQueryableExtensions.OrderBy(tms, "Age").FirstOrDefault();
+            var s2 = DynamicQueryableExtensions.OrderBy(tms, "Age desc").FirstOrDefault();
             Assert.Equal(5, s1.Age);
             Assert.Equal(6, s2.Age);
 

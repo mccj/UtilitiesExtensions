@@ -3,12 +3,13 @@ using System.Linq.Expressions;
 
 namespace System.Linq
 {
-    public static class DynamicQueryableExtension
+    public static class DynamicQueryableExtensions
     {
+        #region OrderBy
         public static IEnumerable<TModel> OrderBy<TModel>(this IEnumerable<TModel> source, string ordering, string defaultValue = null)
         {
             var s = source.AsQueryable();
-            return DynamicQueryableExtension.OrderBy(s, ordering, defaultValue);
+            return DynamicQueryableExtensions.OrderBy(s, ordering, defaultValue);
             //if (!string.IsNullOrWhiteSpace(ordering))
             //    return System.Linq.Dynamic.Core.DynamicQueryableExtensions.OrderBy(source, ordering);
             //else if (!string.IsNullOrWhiteSpace(defaultValue))
@@ -19,7 +20,7 @@ namespace System.Linq
         public static IEnumerable<TModel> OrderBy<TModel>(this IEnumerable<TModel> source, string ordering, Func<IEnumerable<TModel>, IEnumerable<TModel>> defaultexpressions)
         {
             if (!string.IsNullOrWhiteSpace(ordering))
-                return DynamicQueryableExtension.OrderBy(source, ordering);
+                return DynamicQueryableExtensions.OrderBy(source, ordering);
             else if (defaultexpressions != null)
             {
                 return defaultexpressions(source);
@@ -38,7 +39,7 @@ namespace System.Linq
         public static IQueryable<TModel> OrderBy<TModel>(this IQueryable<TModel> source, string ordering, Func<IQueryable<TModel>, IQueryable<TModel>> defaultexpressions)
         {
             if (!string.IsNullOrWhiteSpace(ordering))
-                return DynamicQueryableExtension.OrderBy(source, ordering);
+                return DynamicQueryableExtensions.OrderBy(source, ordering);
             else if (defaultexpressions != null)
             {
                 return defaultexpressions(source);
@@ -48,7 +49,7 @@ namespace System.Linq
         public static IQueryable<TModel> OrderBy<TModel>(this IQueryable<TModel> source, string ordering, params Expression<Func<TModel, object>>[] defaultexpressions)
         {
             if (!string.IsNullOrWhiteSpace(ordering))
-                return DynamicQueryableExtension.OrderBy(source, ordering);
+                return DynamicQueryableExtensions.OrderBy(source, ordering);
             else if (defaultexpressions != null)
             {
                 var ss = source;
@@ -75,12 +76,13 @@ namespace System.Linq
         //    }
         //    return source;
         //}
+        #endregion OrderBy
 
-
+        #region Where
         public static IEnumerable<T> Where<T>(this IEnumerable<T> source, string predicate, string defaultValue = null)
         {
             var s = source.AsQueryable();
-            return DynamicQueryableExtension.Where(s, predicate, defaultValue);
+            return DynamicQueryableExtensions.Where(s, predicate, defaultValue);
 
             //if (!string.IsNullOrWhiteSpace(predicate))
             //    return DynamicQueryableExtension.Where(source, predicate);
@@ -89,7 +91,11 @@ namespace System.Linq
             //else
             //    return source;
         }
-        public static IEnumerable<T> Where<T>(this IQueryable<T> source, string predicate, string defaultValue = null)
+        public static IEnumerable<T> Where<T>(this IEnumerable<T> source, string predicate, params object[] args)
+        {
+            return System.Linq.Dynamic.Core.DynamicQueryableExtensions.Where(source.AsQueryable(), predicate, args);
+        }
+        public static IQueryable<T> Where<T>(this IQueryable<T> source, string predicate, string defaultValue = null)
         {
             if (!string.IsNullOrWhiteSpace(predicate))
                 return System.Linq.Dynamic.Core.DynamicQueryableExtensions.Where(source, predicate);
@@ -98,15 +104,6 @@ namespace System.Linq
             else
                 return source;
         }
-        public static IEnumerable<T> Where<T>(this IEnumerable<T> source, string predicate, params object[] args)
-        {
-            return System.Linq.Dynamic.Core.DynamicQueryableExtensions.Where(source.AsQueryable(), predicate, args);
-        }
-        public static Collections.IEnumerable Select<T>(this IEnumerable<T> source, string predicate, params object[] args)
-        {
-            return System.Linq.Dynamic.Core.DynamicQueryableExtensions.Select(source.AsQueryable(), predicate, args);
-        }
-
         public static IQueryable<T> Where<T>(this IQueryable<T> source, string predicate, params Expression<Func<T, bool>>[] defaultPredicate)
         {
             if (!string.IsNullOrWhiteSpace(predicate))
@@ -122,6 +119,11 @@ namespace System.Linq
             }
             else
                 return source;
+        }
+        #endregion Where
+        public static Collections.IEnumerable Select<T>(this IEnumerable<T> source, string predicate, params object[] args)
+        {
+            return System.Linq.Dynamic.Core.DynamicQueryableExtensions.Select(source.AsQueryable(), predicate, args);
         }
         public static IEnumerable<TResult> LeftJoin<TOuter, TInner, TKey, TResult>(this IEnumerable<TOuter> outer, IEnumerable<TInner> inner, Func<TOuter, TKey> outerKeySelector, Func<TInner, TKey> innerKeySelector, Func<TOuter, TInner, TResult> resultSelector)
         {
@@ -150,7 +152,7 @@ namespace System.Linq
         public static System.Collections.IEnumerable Cast(this System.Collections.IEnumerable source, Type type)
         {
             //return typeof(Enumerable).GetMethod(nameof(Enumerable.Cast)).MakeGenericMethod(type).Invoke(null, new object[] { source }) as System.Collections.IEnumerable;
-            return typeof(DynamicQueryableExtension).GetMethod(nameof(DynamicQueryableExtension.Cast2)).MakeGenericMethod(type).Invoke(null, new object[] { source }) as System.Collections.IEnumerable;
+            return typeof(DynamicQueryableExtensions).GetMethod(nameof(DynamicQueryableExtensions.Cast2)).MakeGenericMethod(type).Invoke(null, new object[] { source }) as System.Collections.IEnumerable;
         }
         public static IEnumerable<TResult> Cast2<TResult>(this System.Collections.IEnumerable source)
         {
