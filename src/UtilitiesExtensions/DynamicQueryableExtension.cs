@@ -30,9 +30,19 @@ namespace System.Linq
         public static IQueryable<TModel> OrderBy<TModel>(this IQueryable<TModel> source, string ordering, string defaultValue = null)
         {
             if (!string.IsNullOrWhiteSpace(ordering))
+#if  !(NET35 || SILVERLIGHT || NETFX_CORE || WINDOWS_APP || DOTNET5_1 || UAP10_0 || NETSTANDARD)
+                return System.Linq.Dynamic.DynamicQueryable.OrderBy(source, ordering);
+#endif
+#if  NETSTANDARD2_0
                 return System.Linq.Dynamic.Core.DynamicQueryableExtensions.OrderBy(source, ordering);
+#endif
             else if (!string.IsNullOrWhiteSpace(defaultValue))
+#if !(NET35 || SILVERLIGHT || NETFX_CORE || WINDOWS_APP || DOTNET5_1 || UAP10_0 || NETSTANDARD)
+                return System.Linq.Dynamic.DynamicQueryable.OrderBy(source, defaultValue);
+#endif
+#if NETSTANDARD2_0
                 return System.Linq.Dynamic.Core.DynamicQueryableExtensions.OrderBy(source, defaultValue);
+#endif
             else
                 return source;
         }
@@ -93,21 +103,41 @@ namespace System.Linq
         }
         public static IEnumerable<T> Where<T>(this IEnumerable<T> source, string predicate, params object[] args)
         {
+#if !(NET35 || SILVERLIGHT || NETFX_CORE || WINDOWS_APP || DOTNET5_1 || UAP10_0 || NETSTANDARD)
+            return System.Linq.Dynamic.DynamicQueryable.Where(source.AsQueryable(), predicate, args);
+#endif
+#if NETSTANDARD2_0
             return System.Linq.Dynamic.Core.DynamicQueryableExtensions.Where(source.AsQueryable(), predicate, args);
+#endif
         }
         public static IQueryable<T> Where<T>(this IQueryable<T> source, string predicate, string defaultValue = null)
         {
             if (!string.IsNullOrWhiteSpace(predicate))
+#if !(NET35 || SILVERLIGHT || NETFX_CORE || WINDOWS_APP || DOTNET5_1 || UAP10_0 || NETSTANDARD)
+                return System.Linq.Dynamic.DynamicQueryable.Where(source, predicate);
+#endif
+#if NETSTANDARD2_0
                 return System.Linq.Dynamic.Core.DynamicQueryableExtensions.Where(source, predicate);
+#endif
             else if (!string.IsNullOrWhiteSpace(defaultValue))
+#if !(NET35 || SILVERLIGHT || NETFX_CORE || WINDOWS_APP || DOTNET5_1 || UAP10_0 || NETSTANDARD)
+                return System.Linq.Dynamic.DynamicQueryable.Where(source, defaultValue);
+#endif
+#if NETSTANDARD2_0
                 return System.Linq.Dynamic.Core.DynamicQueryableExtensions.Where(source, defaultValue);
+#endif
             else
                 return source;
         }
         public static IQueryable<T> Where<T>(this IQueryable<T> source, string predicate, params Expression<Func<T, bool>>[] defaultPredicate)
         {
             if (!string.IsNullOrWhiteSpace(predicate))
+#if !(NET35 || SILVERLIGHT || NETFX_CORE || WINDOWS_APP || DOTNET5_1 || UAP10_0 || NETSTANDARD)
+                return System.Linq.Dynamic.DynamicQueryable.Where(source, predicate);
+#endif
+#if NETSTANDARD2_0
                 return System.Linq.Dynamic.Core.DynamicQueryableExtensions.Where(source, predicate);
+#endif
             else if (defaultPredicate != null)
             {
                 var ss = source;
@@ -123,7 +153,12 @@ namespace System.Linq
         #endregion Where
         public static Collections.IEnumerable Select<T>(this IEnumerable<T> source, string predicate, params object[] args)
         {
+#if !(NET35 || SILVERLIGHT || NETFX_CORE || WINDOWS_APP || DOTNET5_1 || UAP10_0 || NETSTANDARD)
+            return System.Linq.Dynamic.DynamicQueryable.Select(source.AsQueryable(), predicate, args);
+#endif
+#if NETSTANDARD2_0
             return System.Linq.Dynamic.Core.DynamicQueryableExtensions.Select(source.AsQueryable(), predicate, args);
+#endif
         }
         public static IEnumerable<TResult> LeftJoin<TOuter, TInner, TKey, TResult>(this IEnumerable<TOuter> outer, IEnumerable<TInner> inner, Func<TOuter, TKey> outerKeySelector, Func<TInner, TKey> innerKeySelector, Func<TOuter, TInner, TResult> resultSelector)
         {
@@ -166,7 +201,7 @@ namespace System.Linq
             foreach (object obj in source) yield return (TResult)(obj ?? default(TResult));
         }
 
-#if (NET45 )
+#if (NET45)
         public static System.Collections.Generic.HashSet<T> ToHashSet<T>(this System.Collections.Generic.IEnumerable<T> source)
         {
             return new HashSet<T>(source);

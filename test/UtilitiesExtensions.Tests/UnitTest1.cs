@@ -1,5 +1,5 @@
-using Xunit;
 using System.Linq;
+using Xunit;
 
 namespace XUnitTestProject1
 {
@@ -8,7 +8,7 @@ namespace XUnitTestProject1
         [Fact]
         public void Test1()
         {
-            new string[] { "" }.OrderBy("");
+            //new string[] { "" }.OrderBy("");
         }
     }
 }
