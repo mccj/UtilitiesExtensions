@@ -30,17 +30,17 @@ namespace System.Linq
         public static IQueryable<TModel> OrderBy<TModel>(this IQueryable<TModel> source, string ordering, string defaultValue = null)
         {
             if (!string.IsNullOrWhiteSpace(ordering))
-#if  !(NET35 || SILVERLIGHT || NETFX_CORE || WINDOWS_APP || DOTNET5_1 || UAP10_0 || NETSTANDARD)
+#if  Kahanu_System_Linq_Dynamic && !(NET35 || SILVERLIGHT || NETFX_CORE || WINDOWS_APP || DOTNET5_1 || UAP10_0 || NETSTANDARD)
                 return System.Linq.Dynamic.DynamicQueryable.OrderBy(source, ordering);
 #endif
-#if  NETSTANDARD2_0
+#if  !Kahanu_System_Linq_Dynamic || NETSTANDARD2_0
                 return System.Linq.Dynamic.Core.DynamicQueryableExtensions.OrderBy(source, ordering);
 #endif
             else if (!string.IsNullOrWhiteSpace(defaultValue))
-#if !(NET35 || SILVERLIGHT || NETFX_CORE || WINDOWS_APP || DOTNET5_1 || UAP10_0 || NETSTANDARD)
+#if Kahanu_System_Linq_Dynamic && !(NET35 || SILVERLIGHT || NETFX_CORE || WINDOWS_APP || DOTNET5_1 || UAP10_0 || NETSTANDARD)
                 return System.Linq.Dynamic.DynamicQueryable.OrderBy(source, defaultValue);
 #endif
-#if NETSTANDARD2_0
+#if !Kahanu_System_Linq_Dynamic || NETSTANDARD2_0
                 return System.Linq.Dynamic.Core.DynamicQueryableExtensions.OrderBy(source, defaultValue);
 #endif
             else
@@ -103,27 +103,27 @@ namespace System.Linq
         }
         public static IEnumerable<T> Where<T>(this IEnumerable<T> source, string predicate, params object[] args)
         {
-#if !(NET35 || SILVERLIGHT || NETFX_CORE || WINDOWS_APP || DOTNET5_1 || UAP10_0 || NETSTANDARD)
+#if Kahanu_System_Linq_Dynamic && !(NET35 || SILVERLIGHT || NETFX_CORE || WINDOWS_APP || DOTNET5_1 || UAP10_0 || NETSTANDARD)
             return System.Linq.Dynamic.DynamicQueryable.Where(source.AsQueryable(), predicate, args);
 #endif
-#if NETSTANDARD2_0
+#if !Kahanu_System_Linq_Dynamic || NETSTANDARD2_0
             return System.Linq.Dynamic.Core.DynamicQueryableExtensions.Where(source.AsQueryable(), predicate, args);
 #endif
         }
         public static IQueryable<T> Where<T>(this IQueryable<T> source, string predicate, string defaultValue = null)
         {
             if (!string.IsNullOrWhiteSpace(predicate))
-#if !(NET35 || SILVERLIGHT || NETFX_CORE || WINDOWS_APP || DOTNET5_1 || UAP10_0 || NETSTANDARD)
+#if Kahanu_System_Linq_Dynamic && !(NET35 || SILVERLIGHT || NETFX_CORE || WINDOWS_APP || DOTNET5_1 || UAP10_0 || NETSTANDARD)
                 return System.Linq.Dynamic.DynamicQueryable.Where(source, predicate);
 #endif
-#if NETSTANDARD2_0
+#if !Kahanu_System_Linq_Dynamic || NETSTANDARD2_0
                 return System.Linq.Dynamic.Core.DynamicQueryableExtensions.Where(source, predicate);
 #endif
             else if (!string.IsNullOrWhiteSpace(defaultValue))
-#if !(NET35 || SILVERLIGHT || NETFX_CORE || WINDOWS_APP || DOTNET5_1 || UAP10_0 || NETSTANDARD)
+#if Kahanu_System_Linq_Dynamic && !(NET35 || SILVERLIGHT || NETFX_CORE || WINDOWS_APP || DOTNET5_1 || UAP10_0 || NETSTANDARD)
                 return System.Linq.Dynamic.DynamicQueryable.Where(source, defaultValue);
 #endif
-#if NETSTANDARD2_0
+#if !Kahanu_System_Linq_Dynamic || NETSTANDARD2_0
                 return System.Linq.Dynamic.Core.DynamicQueryableExtensions.Where(source, defaultValue);
 #endif
             else
@@ -132,10 +132,10 @@ namespace System.Linq
         public static IQueryable<T> Where<T>(this IQueryable<T> source, string predicate, params Expression<Func<T, bool>>[] defaultPredicate)
         {
             if (!string.IsNullOrWhiteSpace(predicate))
-#if !(NET35 || SILVERLIGHT || NETFX_CORE || WINDOWS_APP || DOTNET5_1 || UAP10_0 || NETSTANDARD)
+#if Kahanu_System_Linq_Dynamic && !(NET35 || SILVERLIGHT || NETFX_CORE || WINDOWS_APP || DOTNET5_1 || UAP10_0 || NETSTANDARD)
                 return System.Linq.Dynamic.DynamicQueryable.Where(source, predicate);
 #endif
-#if NETSTANDARD2_0
+#if !Kahanu_System_Linq_Dynamic || NETSTANDARD2_0
                 return System.Linq.Dynamic.Core.DynamicQueryableExtensions.Where(source, predicate);
 #endif
             else if (defaultPredicate != null)
@@ -153,10 +153,10 @@ namespace System.Linq
         #endregion Where
         public static Collections.IEnumerable Select<T>(this IEnumerable<T> source, string predicate, params object[] args)
         {
-#if !(NET35 || SILVERLIGHT || NETFX_CORE || WINDOWS_APP || DOTNET5_1 || UAP10_0 || NETSTANDARD)
+#if Kahanu_System_Linq_Dynamic && !(NET35 || SILVERLIGHT || NETFX_CORE || WINDOWS_APP || DOTNET5_1 || UAP10_0 || NETSTANDARD)
             return System.Linq.Dynamic.DynamicQueryable.Select(source.AsQueryable(), predicate, args);
 #endif
-#if NETSTANDARD2_0
+#if !Kahanu_System_Linq_Dynamic || NETSTANDARD2_0
             return System.Linq.Dynamic.Core.DynamicQueryableExtensions.Select(source.AsQueryable(), predicate, args);
 #endif
         }

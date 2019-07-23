@@ -5,11 +5,14 @@
     <Description>Library for various useful C# extensions</Description>
     <Version>1.0.1.0-beta-4</Version>
   </PropertyGroup>
-
+  <PropertyGroup Condition="'$(TargetFramework)'=='NET45' OR '$(TargetFramework)'=='NET472'">
+    <!--<DefineConstants>Kahanu_System_Linq_Dynamic</DefineConstants>-->
+  </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="System.Data.DataSetExtensions" Version="4.5.0" />
-    <PackageReference Include="System.Linq.Dynamic.Core" Version="1.0.18" Condition="'$(TargetFramework)' == 'netstandard2.0'" />
-    <PackageReference Include="System.Linq.Dynamic" Version="1.0.7" Condition="'$(TargetFramework)' == 'net45' Or '$(TargetFramework)' == 'net472'" />
+    <PackageReference Include="System.Linq.Dynamic.Core" Version="1.0.18" />
+    <!--<PackageReference Include="System.Linq.Dynamic.Core" Version="1.0.18" Condition="'$(TargetFramework)' == 'netstandard2.0'" />
+    <PackageReference Include="System.Linq.Dynamic" Version="1.0.7" Condition="'$(TargetFramework)' == 'net45' Or '$(TargetFramework)' == 'net472'" />-->
   </ItemGroup>
 
   <ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.0'">
