@@ -43,5 +43,27 @@ namespace System.Linq
                 return null;
             }
         }
+
+
+        public static EnumerableRowCollection<DataRow> AsEnumerable(this DataTable source)
+        {
+            return System.Data.DataTableExtensions.AsEnumerable(source);
+        }
+
+        public static DataTable CopyToDataTable<T>(this IEnumerable<T> source) where T : DataRow
+        {
+            return System.Data.DataTableExtensions.CopyToDataTable(source);
+        }
+
+        public static void CopyToDataTable<T>(this IEnumerable<T> source, DataTable table, LoadOption options) where T : DataRow
+        {
+            System.Data.DataTableExtensions.CopyToDataTable(source, table, options);
+        }
+
+        public static void CopyToDataTable<T>(this IEnumerable<T> source, DataTable table, LoadOption options, FillErrorEventHandler errorHandler) where T : DataRow
+        {
+            System.Data.DataTableExtensions.CopyToDataTable(source, table, options, errorHandler);
+        }
+
     }
 }

@@ -148,6 +148,13 @@ namespace System.Linq
                 yield return value;
             }
         }
+
+#if (NET45)
+        public static System.Collections.Generic.HashSet<T> ToHashSet<T>(this System.Collections.Generic.IEnumerable<T> source)
+        {
+            return new HashSet<T>(source);
+        }
+#endif
     }
 
 }
