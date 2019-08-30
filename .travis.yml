@@ -15,7 +15,7 @@ script:             #½Å±¾
   - dotnet --info
   - dotnet build -c Release
 #  - dotnet publish -c Release
-  - dotnet test -c Release
+#  - dotnet test -c Release
 #  - true
 
 
