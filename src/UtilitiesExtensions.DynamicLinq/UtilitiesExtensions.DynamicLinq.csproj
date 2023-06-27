@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;NET40;</TargetFrameworks>
@@ -8,8 +8,8 @@
     <!--<DefineConstants>Kahanu_System_Linq_Dynamic</DefineConstants>-->
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="System.Linq.Dynamic.Core" Version="1.0.19" />
-    <!--<PackageReference Include="System.Linq.Dynamic.Core" Version="1.0.19" Condition="'$(TargetFramework)' == 'netstandard2.0'" />
+    <PackageReference Include="System.Linq.Dynamic.Core" Version="1.3.0" />
+    <!--<PackageReference Include="System.Linq.Dynamic.Core" Version="1.3.0" Condition="'$(TargetFramework)' == 'netstandard2.0'" />
     <PackageReference Include="System.Linq.Dynamic" Version="1.0.7" Condition="'$(TargetFramework)' == 'net45' Or '$(TargetFramework)' == 'net472'" />-->
   </ItemGroup>
 </Project>
